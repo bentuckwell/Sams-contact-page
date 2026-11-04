@@ -1,6 +1,6 @@
-# Contact a Samaritan – page design
+# Contact a Samaritan – prototype
 
-A design prototype of the Samaritans "Contact a Samaritan" page.
+A clickable prototype of the redesigned Samaritans "Contact a Samaritan" page.
 
 `index.html` is fully self-contained (fonts, images and scripts are embedded), so it works on its own with no build step.
 
@@ -18,4 +18,6 @@ Download `index.html` and open it in any modern browser.
 ## Notes
 
 - The YouTube video loads from YouTube, so it needs an internet connection.
+- The yellow bar at the top switches between the desktop and mobile views.
+- The red button on the chat card switches between the online and offline versions of the card.
 - Links marked as placeholders (`#`) are not yet connected.
