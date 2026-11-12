@@ -1942,10 +1942,25 @@ button.faq-q-idle:hover{color:#045 !important}
 </helmet>
 <div style="position:fixed;top:0;left:0;right:0;height:36px;z-index:1000;background:#f7c33c;padding:0 16px;display:flex;align-items:center;justify-content:center;gap:20px">
   <button onClick="{{ toggleMobile }}" style="background:none;border:0;padding:0;cursor:pointer;font:700 15px 'Varah';color:#045;text-decoration:underline;text-underline-offset:3px">{{ previewLabel }}</button>
+  <button type="button" onClick="{{ toggleHandoff }}" aria-pressed="{{ handoff }}" style="background:#123f47;border:0;border-radius:999px;padding:5px 14px;cursor:pointer;font:700 14px 'Varah';color:#fff;white-space:nowrap">{{ handoffLabel }}</button>
 </div>
 <div aria-hidden="true" style="height:36px"></div>
 <div style="width:100%;max-width:{{ pageMaxW }};margin:0 auto;box-shadow:{{ pageShadow }};min-height:100vh;display:flex;flex-direction:column">
 
+<sc-if value="{{ handoff }}" hint-placeholder-val="{{ false }}">
+<div id="dev-note-header" style="background:#fff;border-top:4px solid #f7c33c;border-bottom:1px solid #dfe5e7;padding:28px 0 32px;scroll-margin-top:44px">
+  <div style="max-width:1238px;margin:0 auto;padding:0 24px;color:#123f47">
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:700;line-height:1.25">{{ hn.header.title }}</h2>
+    <p style="margin:0 0 20px;font-size:17px;line-height:1.55;max-width:820px;text-wrap:pretty">{{ hn.header.summary }}</p>
+    <sc-if value="{{ hn.header.hasBehaviour }}" hint-placeholder-val="{{ true }}">
+    <h3 style="margin:22px 0 8px;font-size:17px;font-weight:700">Behaviour and breakpoints</h3>
+    <ul style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;max-width:900px">
+      <sc-for list="{{ hn.header.behaviour }}" as="b" hint-placeholder-count="2"><li style="font-size:15px;line-height:1.55">{{ b }}</li></sc-for>
+    </ul>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
 <sc-if value="{{ desktopHeader }}" hint-placeholder-val="{{ true }}">
 <!-- Country bar -->
 <sc-if value="{{ showCountry }}" hint-placeholder-val="{{ true }}">
@@ -2032,6 +2047,32 @@ button.faq-q-idle:hover{color:#045 !important}
 </sc-if>
 </sc-if>
 
+<sc-if value="{{ handoff }}" hint-placeholder-val="{{ false }}">
+<div id="dev-note-hero" style="background:#fff;border-top:4px solid #f7c33c;border-bottom:1px solid #dfe5e7;padding:28px 0 32px;scroll-margin-top:44px">
+  <div style="max-width:1238px;margin:0 auto;padding:0 24px;color:#123f47">
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:700;line-height:1.25">{{ hn.hero.title }}</h2>
+    <p style="margin:0 0 20px;font-size:17px;line-height:1.55;max-width:820px;text-wrap:pretty">{{ hn.hero.summary }}</p>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:900px">
+      <sc-for list="{{ hn.hero.items }}" as="it" hint-placeholder-count="3">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+          <h3 style="margin:0;font-size:17px;font-weight:700;line-height:1.35">{{ it.name }}</h3>
+          <sc-if value="{{ it.hasStatus }}" hint-placeholder-val="{{ true }}"><span style="display:inline-block;font-size:12px;font-weight:700;line-height:1;padding:5px 10px;border-radius:999px;background:{{ it.bg }};color:{{ it.fg }};white-space:nowrap">{{ it.status }}</span></sc-if>
+        </div>
+        <p style="margin:0 0 6px;font-size:15px;line-height:1.55;text-wrap:pretty">{{ it.note }}</p>
+        <sc-if value="{{ it.hasHref }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:14px;line-height:1.5">Original on the live site: <sc-if value="{{ it.hasHref }}" hint-placeholder-val="{{ true }}"><a href="{{ it.href }}" target="_blank" rel="noopener" style="color:#0a6b8a;font-weight:700;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere">{{ it.hrefLabel }}</a></sc-if><sc-if value="{{ it.noHref }}" hint-placeholder-val="{{ false }}"><span style="color:#6b7b80">no existing version</span></sc-if></p></sc-if>
+      </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ hn.hero.hasBehaviour }}" hint-placeholder-val="{{ true }}">
+    
+    <ul style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;max-width:900px">
+      <sc-for list="{{ hn.hero.behaviour }}" as="b" hint-placeholder-count="2"><li style="font-size:15px;line-height:1.55">{{ b }}</li></sc-for>
+    </ul>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
 <!-- Intro hero -->
 
 
@@ -2129,6 +2170,30 @@ button.faq-q-idle:hover{color:#045 !important}
     </div>
   </div>
 </div>
+<sc-if value="{{ handoff }}" hint-placeholder-val="{{ false }}">
+<div id="dev-note-whatHappens" style="background:#fff;border-top:4px solid #f7c33c;border-bottom:1px solid #dfe5e7;padding:28px 0 32px;scroll-margin-top:44px">
+  <div style="max-width:1238px;margin:0 auto;padding:0 24px;color:#123f47">
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:700;line-height:1.25">{{ hn.whatHappens.title }}</h2>
+    <p style="margin:0 0 20px;font-size:17px;line-height:1.55;max-width:820px;text-wrap:pretty">{{ hn.whatHappens.summary }}</p>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:900px">
+      <sc-for list="{{ hn.whatHappens.items }}" as="it" hint-placeholder-count="3">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+          <h3 style="margin:0;font-size:17px;font-weight:700;line-height:1.35">{{ it.name }}</h3>
+          <span style="display:inline-block;font-size:12px;font-weight:700;line-height:1;padding:5px 10px;border-radius:999px;background:{{ it.bg }};color:{{ it.fg }};white-space:nowrap">{{ it.status }}</span>
+        </div>
+        <p style="margin:0 0 6px;font-size:15px;line-height:1.55;text-wrap:pretty">{{ it.note }}</p>
+        <sc-if value="{{ it.hasHref }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:14px;line-height:1.5">Original on the live site: <sc-if value="{{ it.hasHref }}" hint-placeholder-val="{{ true }}"><a href="{{ it.href }}" target="_blank" rel="noopener" style="color:#0a6b8a;font-weight:700;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere">{{ it.hrefLabel }}</a></sc-if><sc-if value="{{ it.noHref }}" hint-placeholder-val="{{ false }}"><span style="color:#6b7b80">no existing version</span></sc-if></p></sc-if>
+      </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ hn.whatHappens.hasBehaviour }}" hint-placeholder-val="{{ true }}">
+    
+    
+    </sc-if>
+  </div>
+</div>
+</sc-if>
 <div id="what-happens" style="background-color: #F3F7F8; scroll-margin-top: 16px">
   <div style="max-width: 1238px; margin: 0 auto; padding: 66px 24px 80px; margin-top: 0px; margin-bottom: 0px">
     <h2 style="margin: 0 0 24px; font-size: 38px; font-weight: 600; color: #004455; margin-bottom: 44px; text-align: center">What happens when you call us?</h2>
@@ -2206,6 +2271,32 @@ button.faq-q-idle:hover{color:#045 !important}
   </div>
 </div>
 
+<sc-if value="{{ handoff }}" hint-placeholder-val="{{ false }}">
+<div id="dev-note-stories" style="background:#fff;border-top:4px solid #f7c33c;border-bottom:1px solid #dfe5e7;padding:28px 0 32px;scroll-margin-top:44px">
+  <div style="max-width:1238px;margin:0 auto;padding:0 24px;color:#123f47">
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:700;line-height:1.25">{{ hn.stories.title }}</h2>
+    <p style="margin:0 0 20px;font-size:17px;line-height:1.55;max-width:820px;text-wrap:pretty">{{ hn.stories.summary }}</p>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:900px">
+      <sc-for list="{{ hn.stories.items }}" as="it" hint-placeholder-count="3">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+          <h3 style="margin:0;font-size:17px;font-weight:700;line-height:1.35">{{ it.name }}</h3>
+          <span style="display:inline-block;font-size:12px;font-weight:700;line-height:1;padding:5px 10px;border-radius:999px;background:{{ it.bg }};color:{{ it.fg }};white-space:nowrap">Modified existing component</span>
+        </div>
+        <p style="margin:0 0 6px;font-size:15px;line-height:1.55;text-wrap:pretty">{{ it.note }}</p>
+        <p style="margin:0;font-size:14px;line-height:1.5">Original on the live site: <sc-if value="{{ it.hasHref }}" hint-placeholder-val="{{ true }}"><a href="{{ it.href }}" target="_blank" rel="noopener" style="color:#0a6b8a;font-weight:700;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere">{{ it.hrefLabel }}</a></sc-if><sc-if value="{{ it.noHref }}" hint-placeholder-val="{{ false }}"><span style="color:#6b7b80">no existing version</span></sc-if></p>
+      </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ hn.stories.hasBehaviour }}" hint-placeholder-val="{{ true }}">
+    <h3 style="margin:22px 0 8px;font-size:17px;font-weight:700">Behaviour and breakpoints</h3>
+    <ul style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;max-width:900px">
+      <sc-for list="{{ hn.stories.behaviour }}" as="b" hint-placeholder-count="2"><li style="font-size:15px;line-height:1.55">{{ b }}</li></sc-for>
+    </ul>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
 <!-- Stories of hope -->
 <div style="background:#6e2b61">
   <div style="max-width: 1100px; width: 100%; margin: 0 auto; padding: 80px {{ storiesPadX }} 90px">
@@ -2260,6 +2351,32 @@ button.faq-q-idle:hover{color:#045 !important}
   </div>
 </div>
 
+<sc-if value="{{ handoff }}" hint-placeholder-val="{{ false }}">
+<div id="dev-note-accordion" style="background:#fff;border-top:4px solid #f7c33c;border-bottom:1px solid #dfe5e7;padding:28px 0 32px;scroll-margin-top:44px">
+  <div style="max-width:1238px;margin:0 auto;padding:0 24px;color:#123f47">
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:700;line-height:1.25">{{ hn.accordion.title }}</h2>
+    <p style="margin:0 0 20px;font-size:17px;line-height:1.55;max-width:820px;text-wrap:pretty">{{ hn.accordion.summary }}</p>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:900px">
+      <sc-for list="{{ hn.accordion.items }}" as="it" hint-placeholder-count="3">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+          <h3 style="margin:0;font-size:17px;font-weight:700;line-height:1.35">{{ it.name }}</h3>
+          <span style="display:inline-block;font-size:12px;font-weight:700;line-height:1;padding:5px 10px;border-radius:999px;background:{{ it.bg }};color:{{ it.fg }};white-space:nowrap">{{ it.status }}</span>
+        </div>
+        <p style="margin:0 0 6px;font-size:15px;line-height:1.55;text-wrap:pretty">{{ it.note }}</p>
+        <p style="margin:0;font-size:14px;line-height:1.5">Original on the live site: <sc-if value="{{ it.hasHref }}" hint-placeholder-val="{{ true }}"><a href="{{ it.href }}" target="_blank" rel="noopener" style="color:#0a6b8a;font-weight:700;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere">{{ it.hrefLabel }}</a></sc-if><sc-if value="{{ it.noHref }}" hint-placeholder-val="{{ false }}"><span style="color:#6b7b80">no existing version</span></sc-if></p>
+      </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ hn.accordion.hasBehaviour }}" hint-placeholder-val="{{ true }}">
+    <h3 style="margin:22px 0 8px;font-size:17px;font-weight:700">Behaviour and breakpoints</h3>
+    <ul style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;max-width:900px">
+      <sc-for list="{{ hn.accordion.behaviour }}" as="b" hint-placeholder-count="2"><li style="font-size:15px;line-height:1.55">{{ b }}</li></sc-for>
+    </ul>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
 <!-- Accordion -->
 <div style="background:#F3F7F8">
 <div style="max-width:1224px;width:100%;margin:0 auto;padding:70px 24px 80px">
@@ -2352,6 +2469,32 @@ button.faq-q-idle:hover{color:#045 !important}
 </div>
 </div>
 
+<sc-if value="{{ handoff }}" hint-placeholder-val="{{ false }}">
+<div id="dev-note-related" style="background:#fff;border-top:4px solid #f7c33c;border-bottom:1px solid #dfe5e7;padding:28px 0 32px;scroll-margin-top:44px">
+  <div style="max-width:1238px;margin:0 auto;padding:0 24px;color:#123f47">
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:700;line-height:1.25">{{ hn.related.title }}</h2>
+    <p style="margin:0 0 20px;font-size:17px;line-height:1.55;max-width:820px;text-wrap:pretty">{{ hn.related.summary }}</p>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:900px">
+      <sc-for list="{{ hn.related.items }}" as="it" hint-placeholder-count="3">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+          <h3 style="margin:0;font-size:17px;font-weight:700;line-height:1.35">{{ it.name }}</h3>
+          <span style="display:inline-block;font-size:12px;font-weight:700;line-height:1;padding:5px 10px;border-radius:999px;background:{{ it.bg }};color:{{ it.fg }};white-space:nowrap">{{ it.status }}</span>
+        </div>
+        <p style="margin:0 0 6px;font-size:15px;line-height:1.55;text-wrap:pretty">{{ it.note }}</p>
+        <p style="margin:0;font-size:14px;line-height:1.5">Original on the live site: <sc-if value="{{ it.hasHref }}" hint-placeholder-val="{{ true }}"><a href="{{ it.href }}" target="_blank" rel="noopener" style="color:#0a6b8a;font-weight:700;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere">{{ it.hrefLabel }}</a></sc-if><sc-if value="{{ it.noHref }}" hint-placeholder-val="{{ false }}"><span style="color:#6b7b80">no existing version</span></sc-if></p>
+      </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ hn.related.hasBehaviour }}" hint-placeholder-val="{{ true }}">
+    <h3 style="margin:22px 0 8px;font-size:17px;font-weight:700">Behaviour and breakpoints</h3>
+    <ul style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;max-width:900px">
+      <sc-for list="{{ hn.related.behaviour }}" as="b" hint-placeholder-count="2"><li style="font-size:15px;line-height:1.55">{{ b }}</li></sc-for>
+    </ul>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
 <!-- Related -->
 <div style="background: #125a61; padding: 80px 0 60px; padding-bottom: 80px">
   <div style="max-width:1100px;width:100%;margin:0 auto;padding:0 {{ storiesPadX }}">
@@ -2370,6 +2513,32 @@ button.faq-q-idle:hover{color:#045 !important}
   </div>
 </div>
 
+<sc-if value="{{ handoff }}" hint-placeholder-val="{{ false }}">
+<div id="dev-note-footer" style="background:#fff;border-top:4px solid #f7c33c;border-bottom:1px solid #dfe5e7;padding:28px 0 32px;scroll-margin-top:44px">
+  <div style="max-width:1238px;margin:0 auto;padding:0 24px;color:#123f47">
+    <h2 style="margin:0 0 8px;font-size:26px;font-weight:700;line-height:1.25">{{ hn.footer.title }}</h2>
+    <p style="margin:0 0 20px;font-size:17px;line-height:1.55;max-width:820px;text-wrap:pretty">{{ hn.footer.summary }}</p>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:900px">
+      <sc-for list="{{ hn.footer.items }}" as="it" hint-placeholder-count="3">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+          <h3 style="margin:0;font-size:17px;font-weight:700;line-height:1.35">{{ it.name }}</h3>
+          <span style="display:inline-block;font-size:12px;font-weight:700;line-height:1;padding:5px 10px;border-radius:999px;background:{{ it.bg }};color:{{ it.fg }};white-space:nowrap">{{ it.status }}</span>
+        </div>
+        <p style="margin:0 0 6px;font-size:15px;line-height:1.55;text-wrap:pretty">{{ it.note }}</p>
+        <p style="margin:0;font-size:14px;line-height:1.5">Original on the live site: <sc-if value="{{ it.hasHref }}" hint-placeholder-val="{{ true }}"><a href="{{ it.href }}" target="_blank" rel="noopener" style="color:#0a6b8a;font-weight:700;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere">{{ it.hrefLabel }}</a></sc-if><sc-if value="{{ it.noHref }}" hint-placeholder-val="{{ false }}"><span style="color:#6b7b80">no existing version</span></sc-if></p>
+      </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ hn.footer.hasBehaviour }}" hint-placeholder-val="{{ true }}">
+    <h3 style="margin:22px 0 8px;font-size:17px;font-weight:700">Behaviour and breakpoints</h3>
+    <ul style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;max-width:900px">
+      <sc-for list="{{ hn.footer.behaviour }}" as="b" hint-placeholder-count="2"><li style="font-size:15px;line-height:1.55">{{ b }}</li></sc-for>
+    </ul>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
 <!-- Footer -->
 <div style="max-width:1100px;width:100%;margin:0 auto;padding:40px 24px 60px">
   <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
@@ -2422,7 +2591,7 @@ button.faq-q-idle:hover{color:#045 !important}
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { mobile: false, menu: false, vw: typeof window !== "undefined" ? window.innerWidth : 1280, playing: false, open: 0, tab: 0, country: true, chatAlt: false, speakOpen: false };
+  state = { mobile: false, menu: false, vw: typeof window !== "undefined" ? window.innerWidth : 1280, playing: false, open: 0, tab: 0, country: true, chatAlt: false, speakOpen: false, handoff: false };
   componentDidMount() { this._rs = () => this.setState(s => ({ vw: s.mobile ? 375 : window.innerWidth })); window.addEventListener("resize", this._rs); this._rs(); }
   componentWillUnmount() { window.removeEventListener("resize", this._rs); }
   renderVals() {
@@ -2457,6 +2626,12 @@ class Component extends DCLogic {
       scrollToWhatHappens: (e) => { if (e && e.preventDefault) e.preventDefault(); const el = document.getElementById("what-happens"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); },
       whCardDir: this.state.vw < 600 ? "column" : "row-reverse", whCardGap: this.state.vw < 600 ? "16px" : "24px", whIconSize: this.state.vw < 600 ? "48px" : "96px",
       chatMain: !this.state.chatAlt, chatAlt: this.state.chatAlt, toggleChat: () => this.setState(st => ({ chatAlt: !st.chatAlt })),
+      hn: {"header": {"num": 1, "title": "Site header", "status": "Reused", "bg": "#11a385", "fg": "#fff", "summary": "The global header from the live site, unchanged. Build it from the existing header component, not from this prototype.", "items": [{"name": "Country selector bar", "status": "Reused", "bg": "#11a385", "fg": "#fff", "note": "“Choose another country…” bar with dropdown, Continue button and close.", "href": "https://www.samaritans.org/wales/", "hrefLabel": "samaritans.org/wales/", "hasHref": true, "noHref": false}, {"name": "Header", "status": "Reused", "bg": "#11a385", "fg": "#fff", "note": "Logo with Donate now (piggy bank icon) and Contact a Samaritan (speech icon) links.", "href": "https://www.samaritans.org/wales/", "hrefLabel": "samaritans.org/wales/", "hasHref": true, "noHref": false}, {"name": "Main navigation and search", "status": "Reused", "bg": "#11a385", "fg": "#fff", "note": "How we can help and Support us dropdowns, with the Search our website box.", "href": "https://www.samaritans.org/wales/", "hrefLabel": "samaritans.org/wales/", "hasHref": true, "noHref": false}, {"name": "Compact header and menu", "status": "Reused", "bg": "#11a385", "fg": "#fff", "note": "Logo and Menu button below 1024px. The menu opens the nav links and search.", "href": "https://www.samaritans.org/wales/", "hrefLabel": "samaritans.org/wales/", "hasHref": true, "noHref": false}], "behaviour": [], "hasBehaviour": false}, "hero": {"num": 2, "title": "Intro hero, call card and chat card", "status": "Modified", "bg": "#f7c33c", "fg": "#123f47", "summary": "Same teal hero as the current Contact a Samaritan page. The call card has a new layout and the chat card is new.", "items": [{"name": "Breadcrumb", "status": "Reused", "hasStatus": true, "bg": "#11a385", "fg": "#fff", "note": "Reuse from the existing page", "href": "", "hrefLabel": "", "hasHref": false, "noHref": true}, {"name": "Page title and supporting title", "status": "Reused", "hasStatus": true, "bg": "#11a385", "fg": "#fff", "note": "Reuse from the existing page. We’ve updated the supporting line.", "href": "https://www.samaritans.org/wales/how-we-can-help/contact-samaritan/", "hrefLabel": "samaritans.org/wales/how-we-can-help/contact-samaritan/", "hasHref": true, "noHref": false}, {"name": "Call us anytime block", "status": "Modified", "hasStatus": true, "bg": "#f7c33c", "fg": "#123f47", "note": "This block is a modified version of the “volunteer with us” block from the donate page", "href": "https://www.samaritans.org/wales/", "hrefLabel": "samaritans.org/wales/", "hasHref": true, "noHref": false}, {"name": "Call 116 123 button", "status": "Reused", "hasStatus": true, "bg": "#11a385", "fg": "#fff", "note": "The call 116 123 button should be reused from the existing contact page", "href": "https://www.samaritans.org/wales/how-we-can-help/contact-samaritan/", "hrefLabel": "samaritans.org/wales/how-we-can-help/contact-samaritan/", "hasHref": true, "noHref": false}, {"name": "Chat with us", "status": "", "hasStatus": false, "bg": "", "fg": "", "note": "This is a new card design. It is based on the “call us now” card on the existing contact us page. It has an online and offline state. Click on the red button underneath the card to switch the state view. The red button is not part of the design and should not be built. The button is new and based on the main call button, but smaller and in a different colour scheme.", "href": "", "hrefLabel": "", "hasHref": false, "noHref": true}, {"name": "Accessibility", "status": "", "hasStatus": false, "bg": "", "fg": "", "note": "These is a new card designs. The links are based on the links in the “How we can help section” dropdown menu", "href": "", "hrefLabel": "", "hasHref": false, "noHref": true}, {"name": "More support options", "status": "", "hasStatus": false, "bg": "", "fg": "", "note": "These are new card designs, the links are based on the links in the “support us” dropdown menu", "href": "", "hrefLabel": "", "hasHref": false, "noHref": true}], "behaviour": [], "hasBehaviour": false}, "whatHappens": {"num": 3, "title": "What happens when you call us?", "status": "Modified", "bg": "#f7c33c", "fg": "#123f47", "summary": "The step cards from the live phone page, now with an icon on each card. A new text block underneath covers what people can talk to us about.", "items": [{"name": "Step cards", "status": "Modified existing component", "bg": "#f7c33c", "fg": "#123f47", "note": "These cards are taken from an existing page. We’ve made them wider, applied a 2 col grid on desktop and added icons into them. Icons supplied by Amanda at Samaritans. Client still needs to supply the SVG versions of icons", "href": "https://www.samaritans.org/wales/how-we-can-help/contact-samaritan/talk-us-phone/", "hrefLabel": "samaritans.org/wales/how-we-can-help/contact-samaritan/talk-us-phone/", "hasHref": true, "noHref": false}, {"name": "What can I speak to Samaritans about?", "status": "New component", "hasStatus": true, "bg": "#6e2b61", "fg": "#fff", "note": "TBC", "href": "", "hrefLabel": "", "hasHref": false, "noHref": true}], "behaviour": ["", ""], "hasBehaviour": true}, "stories": {"num": 4, "title": "Stories of hope", "status": "New", "bg": "#6e2b61", "fg": "#fff", "summary": "A section that isn’t on the current contact page: purple background, heading, intro, video and three story cards.", "items": [{"name": "Video embed", "status": "Modified", "bg": "#f7c33c", "fg": "#123f47", "note": "This video is taken from Nick’s Story of Hope page. I suggest the video is always present but the video could change based on Samaritans choice", "href": "https://www.samaritans.org/wales/about-samaritans/stories-of-hope/nicks-story/", "hrefLabel": "samaritans.org/wales/about-samaritans/stories-of-hope/nicks-story/", "hasHref": true, "noHref": false}, {"name": "Story cards", "status": "Modified", "bg": "#f7c33c", "fg": "#123f47", "note": "These cards already exist on the “related content” section of any Story page. I’m using 3 in a row, so their width may need to be adapted. I suggest we’d always have 3 but the stories featured could change based on Samaritans choice", "href": "https://www.samaritans.org/wales/about-samaritans/stories-of-hope/nicks-story/", "hrefLabel": "samaritans.org/wales/about-samaritans/stories-of-hope/nicks-story/", "hasHref": true, "noHref": false}], "behaviour": [], "hasBehaviour": false}, "accordion": {"num": 5, "title": "More about our services", "status": "Modified", "bg": "#f7c33c", "fg": "#123f47", "summary": "The FAQ accordion from the current page, with a new two-panel layout on desktop and a new set of questions.", "items": [{"name": "Questions and answers block", "status": "New", "bg": "#6e2b61", "fg": "#fff", "note": "This block is new. The contents on the left changes based on what is selected on the right. On the mobile view we’d revert to the existing accordion that can be seen on the current contact page", "href": "https://www.samaritans.org/wales/how-we-can-help/contact-samaritan/", "hrefLabel": "samaritans.org/wales/how-we-can-help/contact-samaritan/", "hasHref": true, "noHref": false}], "behaviour": [], "hasBehaviour": false}, "related": {"num": 6, "title": "More sources of support", "status": "Reused", "bg": "#11a385", "fg": "#fff", "summary": "An adapted version of an existing component", "items": [{"name": "Related content cards", "status": "Modified existing section", "bg": "#f7c33c", "fg": "#123f47", "note": "This section already exists on the current contact page. We need to remove the tabbed section but leave the 3 cards. The heading text is changing to \"More sources of support\"", "href": "https://www.samaritans.org/wales/how-we-can-help/contact-samaritan/", "hrefLabel": "samaritans.org/wales/how-we-can-help/contact-samaritan/", "hasHref": true, "noHref": false}], "behaviour": [], "hasBehaviour": false}, "footer": {"num": 7, "title": "Footer", "status": "Reused", "bg": "#11a385", "fg": "#fff", "summary": "The global footer, unchanged.", "items": [{"name": "Footer", "status": "Reused", "bg": "#11a385", "fg": "#fff", "note": "Country selector, four link columns, the 116 123 and Newsletter boxes, social icons, legal links and charity registration text.", "href": "https://www.samaritans.org/wales/", "hrefLabel": "samaritans.org/wales/", "hasHref": true, "noHref": false}], "behaviour": [], "hasBehaviour": false}},
+      hnOverview: {"legend": [{"status": "New", "bg": "#6e2b61", "fg": "#fff", "desc": "Not on the live site. Build from scratch."}, {"status": "Modified", "bg": "#f7c33c", "fg": "#123f47", "desc": "Based on an existing component, with changes listed in the note."}, {"status": "Reused", "bg": "#11a385", "fg": "#fff", "desc": "Use the existing component as it is."}, {"status": "Prototype only", "bg": "#5b6b70", "fg": "#fff", "desc": "Only here for review. Don’t build it."}], "removed": ["“Speak to us in person” card with the Find a branch button.", "“Our email service has closed” card.", "“Find the service that’s right for you…” tabs (Call us, Visit a branch, Welsh language). These include the Welsh-language line, 0808 164 0123, so confirm where that now appears on the Wales site."], "open": ["Accordion answers are lorem ipsum.", "Chat card copy still has placeholders: [Agreed availability information.] and [agreed days and hours].", "Clock and thought-bubble icons are PNGs and need SVG versions.", "Most links are “#” and need real destinations, including the d/Deaf and speech link.", "The video thumbnail is a placeholder."], "proto": ["The yellow bar at the top, with its mobile preview and dev notes buttons.", "The red “Show offline design” and “Show online design” buttons on the chat card."], "breakpoints": ["600px: the chat card stacks, and the step card icons move above the text.", "840px: the FAQ switches between accordion and two-panel layouts.", "1024px: the desktop header switches to the compact header."]},
+      hnIndex: ["header", "hero", "whatHappens", "stories", "accordion", "related", "footer"].map(k => { const n = ({"header": {"num": 1, "title": "Site header", "status": "Reused", "bg": "#11a385", "fg": "#fff"}, "hero": {"num": 2, "title": "Intro hero, call card and chat card", "status": "Modified", "bg": "#f7c33c", "fg": "#123f47"}, "whatHappens": {"num": 3, "title": "What happens when you call us?", "status": "Modified", "bg": "#f7c33c", "fg": "#123f47"}, "stories": {"num": 4, "title": "Stories of hope", "status": "New", "bg": "#6e2b61", "fg": "#fff"}, "accordion": {"num": 5, "title": "More about our services", "status": "Modified", "bg": "#f7c33c", "fg": "#123f47"}, "related": {"num": 6, "title": "More sources of support", "status": "Reused", "bg": "#11a385", "fg": "#fff"}, "footer": {"num": 7, "title": "Footer", "status": "Reused", "bg": "#11a385", "fg": "#fff"}})[k]; return { ...n, go: () => { const el = document.getElementById("dev-note-" + k); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); } }; }),
+      handoff: this.state.handoff, handoffLabel: this.state.handoff ? "Hide dev notes" : "Dev handoff notes",
+      toggleHandoff: () => { const on = !this.state.handoff; this.setState({ handoff: on }); if (on && typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" }); },
+      hnWide: this.state.vw >= 840, hnCols: this.state.vw >= 840 ? "minmax(0,1.1fr) minmax(0,2.2fr) minmax(0,1.2fr)" : "minmax(0,1fr)",
       heroH1Size: this.state.vw < 600 ? "32px" : "54px",
       fs28: this.state.vw < 600 ? "24px" : "28px",
       bulbW: this.state.vw < 600 ? "42.5px" : "auto", bulbH: this.state.vw < 600 ? "auto" : "144px",
